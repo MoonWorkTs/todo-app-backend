@@ -4,6 +4,8 @@ import (
 	"context"
 	"net/http"
 	"time"
+
+	"github.com/sirupsen/logrus"
 )
 
 type Server struct {
@@ -11,6 +13,8 @@ type Server struct {
 }
 
 func (s *Server) Run(port string, handler http.Handler) error {
+	logrus.Infof("server is listening on port %s", port)
+
 	s.httpServer = &http.Server{
 		Addr:           ":" + port,
 		Handler:        handler,
